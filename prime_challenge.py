@@ -19,8 +19,6 @@ class PrimeFinder:
         self._sieve_max = limit
 
     def is_prime(self, x):
-        if x <= 1:
-            return False
         if x <= self._sieve_max:
             return x in self._sieve_set
         self.fill_sieve(ceil(sqrt(x)))
