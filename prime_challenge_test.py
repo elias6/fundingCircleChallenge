@@ -7,18 +7,11 @@ from prime_challenge import PrimeFinder, format_number
 class TestPrimeFinder(unittest.TestCase):
     def test_prime_finder(self):
         prime_finder = PrimeFinder()
-        self.assertTrue(prime_finder.is_prime(2))
-        self.assertTrue(prime_finder.is_prime(3))
-        self.assertTrue(prime_finder.is_prime(5))
-        self.assertTrue(prime_finder.is_prime(7))
-
-        self.assertFalse(prime_finder.is_prime(0))
-        self.assertFalse(prime_finder.is_prime(1))
-        self.assertFalse(prime_finder.is_prime(4))
-        self.assertFalse(prime_finder.is_prime(6))
-        self.assertFalse(prime_finder.is_prime(8))
-        self.assertFalse(prime_finder.is_prime(9))
-        self.assertFalse(prime_finder.is_prime(10))
+        primes = {2, 3, 5, 7, 11, 13, 17, 19}
+        for i in range(-1, 21):
+            self.assertEqual(prime_finder.is_prime(i),
+                             i in primes,
+                             "wrong result for is_prime({})".format(i))
 
     def test_format_number(self):
         self.assertEqual("        ", format_number(1, length=8))
