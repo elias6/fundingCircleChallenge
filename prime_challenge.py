@@ -10,18 +10,18 @@ class PrimeFinder:
         self._sieve_set = set()
         self._sieve_max = 1
 
-    def fill_sieve(self, limit):
+    def _fill_sieve(self, limit):
         for i in range(self._sieve_max + 1, limit + 1):
             sieve_iter = takewhile(lambda y: y**2 <= i, self._sieve)
             if all(i % j != 0 for j in sieve_iter):
                 self._sieve.append(i)
                 self._sieve_set.add(i)
-        self._sieve_max = limit
+        self._sieve_max = max(self._sieve_max, limit)
 
     def is_prime(self, x):
         if x <= self._sieve_max:
             return x in self._sieve_set
-        self.fill_sieve(ceil(sqrt(x)))
+        self._fill_sieve(ceil(sqrt(x)))
         sieve_iter = takewhile(lambda y: y**2 <= x, self._sieve)
         return all(x % y != 0 for y in sieve_iter)
 
