@@ -37,6 +37,18 @@ def format_number(x, length):
     else:
         return ("{:" + str(length) + ",}").format(x)
 
+
+def make_prime_table(prime_count):
+    primes = list(PrimeFinder().first_primes(prime_count))
+    product_length = len("{:,}".format(max(primes) ** 2))
+
+    result = []
+    for x in [1] + primes:
+        result.append("  ".join(format_number(x * y, product_length)
+                                              for y in [1] + primes))
+    return "\n".join(result)
+
+
 if __name__ == "__main__":
     parser = ArgumentParser(
         description="Print a multiplication table of the first n prime numbers.")
@@ -44,8 +56,4 @@ if __name__ == "__main__":
         help="Number of primes to use for the table")
     args = parser.parse_args()
 
-    primes = list(PrimeFinder().first_primes(args.n))
-    product_length = len("{:,}".format(max(primes) ** 2))
-
-    for x in [1] + primes:
-        print("  ".join(format_number(x * y, product_length) for y in [1] + primes))
+    print(make_prime_table(args.n))
