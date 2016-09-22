@@ -12,7 +12,7 @@ class PrimeFinder:
 
     def fill_sieve(self, limit):
         for i in range(self._sieve_max + 1, limit + 1):
-            sieve_iter = takewhile(lambda y: y <= ceil(sqrt(i)), self._sieve)
+            sieve_iter = takewhile(lambda y: y**2 <= i, self._sieve)
             if all(i % j != 0 for j in sieve_iter):
                 self._sieve.append(i)
                 self._sieve_set.add(i)
