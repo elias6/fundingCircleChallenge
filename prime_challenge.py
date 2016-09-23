@@ -43,7 +43,7 @@ def make_prime_table(prime_count):
     result = []
     for x in [1] + primes:
         result.append("  ".join(format_number(x * y, product_length)
-                                              for y in [1] + primes))
+                                for y in [1] + primes))
     return "\n".join(result)
 
 
